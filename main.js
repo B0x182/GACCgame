@@ -47,7 +47,7 @@ const config = {
         createContainer: true
     },
 	//If several are given, the first is started
-    scene: [ResizeHandler, PreloadScene, StartScene, GameScene, GameOverScene]
+    scene: [ResizeHandler, PreloadScene, StartScene]
 
 };
 
