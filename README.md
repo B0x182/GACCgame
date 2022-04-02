@@ -11,7 +11,7 @@
 </div>
 
 
-## About The Project
+## About 
 
 This is a simple browser game written in JavaScript, using Phaser where you need catching items.
 The game can be played on desktop and mobile devices. 
@@ -38,4 +38,18 @@ Incollectible:
 * Stone:&emsp;&nbsp;&nbsp;&emsp;&emsp;	-1 live
 * Red Serum 1:&emsp;            -1 live
 * Skull:&emsp;&nbsp;&nbsp;&emsp;&emsp; -1 live
+
+## Game Modes
+
+There are two game modes which have different player styles; “normal” and “hard” which can be selected on the start screen. On “hard” mode the item drop time is much faster than on the “normal” mode.
+
+
+## Resolution
+
+## Desktop
+
+On desktop environments the game can be played with the cursor keys; up, left and right
+
+
+## Mobile 
 
