@@ -15,6 +15,9 @@
 
 This is a simple browser game written in JavaScript, using Phaser where you need catching items.
 The game can be played on desktop and mobile devices. 
+<br>
+ <h3> use the tags: "#GACC #GACCHighscore" to post your score on twitter with a pic of the game over screen.</h3>
+<br>
 
 * game starts with 3 lives and ends with 0 lives
 * any collectibles may remain on the ground for later pick up
