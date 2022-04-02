@@ -1,6 +1,6 @@
 <div align="center">
   
-  <img src="asset/images/skull.png" alt="skull" width="80" height="80">
+  <img src="assets/images/skull.png" alt="skull" width="80" height="80">
   
   <h3 align="center">GACC Community Game</h3>
   
