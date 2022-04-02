@@ -59,6 +59,7 @@ const MIN_SIZE_HEIGHT_SCREEN = 240<br>
 
 On desktop environments the game can be played with the cursor keys; up, left and right
 
+<img src="assets/images/action_keys.jpg" alt="skull" width="200" height="200">
 
 ## Mobile 
 
@@ -68,3 +69,10 @@ To avoid this the base-resolution has to be low for mobile devices, but then it 
 * Use it in landscape mode
 * For control multi-touch is implemented: Use one hand for left/right (swipe) and the other hand for jump (upwards swipe)
 
+<img src="assets/images/mobile_controls.jpg" alt="skull" width="200" height="200">
+
+
+## Contact
+
+Twitter - [B0x182](https://twitter.com/B0x182) 
+This is a community project. I am not associated with #GACC Stuff
