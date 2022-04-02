@@ -83,10 +83,46 @@ class GameOverScene extends Phaser.Scene {
 			this.l2.visible = false;
 		}
         
+		
+		this.add.image(this.width  / 5 * 2 , this.height / 2, "serum_1")
+			.setOrigin(.5)
+			.setScale(.16)
+			.setDepth(1)
+		;
+		
+		var m1Text = this.make.text({
+                x: this.width  / 5 * 2,
+                y: this.height  / 2 + 60 ,
+                text:  "x " + data.m1Cnt,
+                style: {
+                    font: '20px monospace',
+                    fill: 'white'
+                }
+            });
+            m1Text.setOrigin(.5);
+			m1Text.setShadow(2, 2, "DarkSlateGray", 2);
+		
+		this.add.image(this.width  / 5 * 3 , this.height / 2, "serum_2")
+			.setOrigin(.5)
+			.setScale(.16)
+			.setDepth(1)
+		;
+		
+			var m2Text = this.make.text({
+                x: this.width  / 5 * 3,
+                y: this.height  / 2 + 60 ,
+                text: "x " + data.m2Cnt,
+                style: {
+                    font: '20px monospace',
+                    fill: 'white'
+                }
+            });
+            m2Text.setOrigin(.5);
+			m2Text.setShadow(2, 2, "DarkSlateGray", 2);
 
 
 
-		this.playBtn = this.add.image(this.width  / 2, this.height  / 2, "play")
+		this.playBtn = this.add.image(this.width  / 2, this.height  / 3 * 2, "play")
 			.setOrigin(.5)
 			.setDepth(1)
 			.setInteractive({ cursor: "pointer" })
@@ -96,7 +132,7 @@ class GameOverScene extends Phaser.Scene {
 
 	var pText = this.make.text({
                 x: this.width  / 2,
-                y: this.height  / 2 + 50 ,
+                y: this.height  / 3 * 2 + 60 ,
                 text: 'Play again',
                 style: {
                     font: '20px monospace',
