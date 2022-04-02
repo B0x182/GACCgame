@@ -43,7 +43,7 @@ class PreloadScene extends Phaser.Scene {
                     this.sceneStopped = true
 					// Shutdown the Scene, clearing display list, timers, etc.
                     this.scene.stop('PreloadScene')
-                    this.handlerScene.cameras.main.setBackgroundColor("#020079")
+                    this.handlerScene.cameras.main.setBackgroundColor("#000000")
                     this.handlerScene.launchScene('StartScene')
                 },
                 loop: false
@@ -68,12 +68,17 @@ class PreloadScene extends Phaser.Scene {
 		this.load.image('serum_1_red', 'assets/images/serum_1_red.png');
 		this.load.image('skull', 'assets/images/skull.png');
 		
-		this.load.image('greens', 'assets/images/greens.png');
+		this.load.image('greens1', 'assets/images/greens1.png');
+		this.load.image('greens2', 'assets/images/greens2.png');
 		this.load.image('ground', 'assets/images/ground.png');
 		
 		this.load.image('cloud', 'assets/images/cloud.png');
 		
-		this.load.spritesheet('ape', 'assets/images/ape.png', { frameWidth: 670, frameHeight: 1500 });
+		this.load.image('level1', 'assets/images/level1.png');
+		this.load.image('level2', 'assets/images/level2.png');
+		
+		this.load.spritesheet('ape1', 'assets/images/ape1.png', { frameWidth: 670, frameHeight: 1500 });
+		this.load.spritesheet('ape2', 'assets/images/ape2.png', { frameWidth: 670, frameHeight: 1500 });
 		
 		// -------------------------------------------------------
 			
