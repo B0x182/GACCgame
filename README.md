@@ -66,5 +66,5 @@ The a resize-handler allows the usage on mobile devices. The viewport on mobile 
 To avoid this the base-resolution has to be low for mobile devices, but then it would be full of pixels on desktops. 
  
 * Use it in landscape mode
-* Use one hand for left/right (swipe) and the other hand for jump (upwards swipe)
+* For control multi-touch is implemented: Use one hand for left/right (swipe) and the other hand for jump (upwards swipe)
 
