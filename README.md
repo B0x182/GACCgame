@@ -23,3 +23,19 @@ The game can be played on desktop and mobile devices.
 * there are maximum 2 skulls in the game, which appear and disappear by time
 * skulls will remove collectibles on collision
 * there are 2 game modes
+
+
+## Game Objects
+
+Collectibles: 
+* Banana 1:&emsp;	        +1 score
+* Banana 2:&emsp;  	      +2 score
+* Banana 3:&emsp; 	      + 3 score
+* Serum 1:&nbsp;&emsp;		+ 5 score
+* Serum 2:&nbsp;&emsp; 		+10 score
+
+Incollectible:
+* Stone:&emsp;&nbsp;&nbsp;&emsp;&emsp;	-1 live
+* Red Serum 1:&emsp;            -1 live
+* Skull:&emsp;&nbsp;&nbsp;&emsp;&emsp; -1 live
+
