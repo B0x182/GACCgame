@@ -32,8 +32,8 @@ class GameScene extends Phaser.Scene {
         yPos = 0;
         touchJump = false;
         touchJumpThreshold = 5;
-	edgeTimer = 0;
-	jumping = false;
+		 edgeTimer = 0;
+		 jumping = false;
 
 	preload() {
 		
@@ -59,6 +59,9 @@ class GameScene extends Phaser.Scene {
 	   this.skullCycle = 0;
 	   this.score = 0;
 	   this.lives = 3;
+	   
+	   this.m1Cnt = 0;
+	   this.m2Cnt = 0;
 	     
 	   
 	    // background image
@@ -288,8 +291,7 @@ class GameScene extends Phaser.Scene {
 		
 		 //if we have just left the ground set edge time for 100ms time
         if (!this.player.body.touching.down && this.wasStanding) {
-           	// prevent double jump
-		this.edgeTimer = time + 100;
+            this.edgeTimer = time + 100;
         }
 		
 		
@@ -336,7 +338,7 @@ class GameScene extends Phaser.Scene {
 			this.anims.remove('left');
 			this.anims.remove('right');
 			this.anims.remove('turn');
-			this.handlerScene.launchScene('GameOverScene', { score: this.score, level: this.level});
+			this.handlerScene.launchScene('GameOverScene', { score: this.score, level: this.level, m1Cnt: this.m1Cnt, m2Cnt: this.m2Cnt});
 			
 		}
 
@@ -453,10 +455,12 @@ class GameScene extends Phaser.Scene {
     	}
     	if(item.texture.key == "serum_1"){
     		 this.score += 5;
+			 this.m1Cnt += 1;
 		
     	}
     	if(item.texture.key == "serum_2"){
     		 this.score += 10;
+			 this.m2Cnt += 1;
 			
     		 
     	}
