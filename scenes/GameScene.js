@@ -32,8 +32,8 @@ class GameScene extends Phaser.Scene {
         yPos = 0;
         touchJump = false;
         touchJumpThreshold = 5;
-		 edgeTimer = 0;
-		 jumping = false;
+	edgeTimer = 0;
+	jumping = false;
 
 	preload() {
 		
@@ -288,7 +288,8 @@ class GameScene extends Phaser.Scene {
 		
 		 //if we have just left the ground set edge time for 100ms time
         if (!this.player.body.touching.down && this.wasStanding) {
-            this.edgeTimer = time + 100;
+           	// prevent double jump
+		this.edgeTimer = time + 100;
         }
 		
 		
