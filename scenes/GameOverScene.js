@@ -59,7 +59,7 @@ class GameOverScene extends Phaser.Scene {
 
 
 		
-		this.l1 = this.add.image(this.width  / 4 , this.height / 3, "level1")
+		this.l1 = this.add.image(this.width  / 5 , this.height / 3, "level1")
 			.setOrigin(.5)
 			.setScale(.5)
 			.setDepth(1)
@@ -71,7 +71,7 @@ class GameOverScene extends Phaser.Scene {
 			this.l1.visible = false;
 		}
 		
-		this.l2 = this.add.image(this.width  / 4 , this.height / 3, "level2")
+		this.l2 = this.add.image(this.width  / 5 , this.height / 3, "level2")
 			.setOrigin(.5)
 			.setScale(.5)
 			.setDepth(1)
