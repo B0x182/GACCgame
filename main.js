@@ -3,6 +3,8 @@
 import ResizeHandler from './scenes/ResizeHandler.js'
 import PreloadScene from './scenes/PreloadScene.js'
 import StartScene from './scenes/StartScene.js'
+import GameScene from './scenes/GameScene.js'
+import GameOverScene from './scenes/GameOverScene.js'
 
 
 // Aspect Ratio 16:9 - landscape
@@ -47,11 +49,16 @@ const config = {
         createContainer: true
     },
 	//If several are given, the first is started
-    scene: [ResizeHandler, PreloadScene, StartScene]
+    scene: [ResizeHandler, PreloadScene, StartScene, GameScene, GameOverScene]
 
 };
 
+
+
+// the game instance
 const game = new Phaser.Game(config);
+
+
 
 // Global
 game.debugMode = false;
