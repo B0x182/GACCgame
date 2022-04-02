@@ -27,6 +27,13 @@ class GameScene extends Phaser.Scene {
 	skull2;
 	skullCycle;
 
+	//added some new variables here to deal with touch jumping
+        prevPos = 0;
+        yPos = 0;
+        touchJump = false;
+        touchJumpThreshold = 5;
+		 edgeTimer = 0;
+		 jumping = false;
 
 	preload() {
 		
@@ -55,7 +62,7 @@ class GameScene extends Phaser.Scene {
 	     
 	   
 	    // background image
-   		 this.add.image(0, 0, "greens2").setOrigin(0).setScale(.75);
+   		 this.add.image(0, 0, "greens2").setOrigin(0).setScale(0.75);
 	  
 		
 		// create score text
@@ -105,19 +112,21 @@ class GameScene extends Phaser.Scene {
     	this.movingPlatform.body.allowGravity = false;
     	this.movingPlatform.setVelocityX(50);
 
-	    // here we create the ground
-	     this.platforms.create(0, 540-10, 'ground').setOrigin(0).refreshBody();
+	  
 
 	    // The player and its settings
-    	this.player = this.physics.add.sprite(100, 200, this.ape).setScale(0.13);
+    	this.player = this.physics.add.sprite(this.width / 2, this.height / 2, this.ape).setScale(0.13);
 		
 		 // Player physics properties. Give the little guy a slight bounce.
     	this.player.setBounce(0.2);
     	this.player.setCollideWorldBounds(true);
+		//this.player.onWorldBounds = true;
     	this.createAnimations();
 		
 		  //  Input Events
         this.cursors = this.input.keyboard.createCursorKeys();
+		// add input for mobile
+		this.input.addPointer(1);
 
         //physics 
    		 this.physics.add.collider(this.player, this.platforms);
@@ -135,6 +144,11 @@ class GameScene extends Phaser.Scene {
 		this.physics.add.overlap(this.collectibles, this.movingPlatform, this.removeItem, null, this);
 		 
 		  this.physics.add.collider(this.collectiblesOnGround, this.platforms); 
+		  
+		 
+		  this.physics.world.setBounds(0, 0, this.width,  this.height);
+		    // here we create the ground
+	     this.platforms.create(0, 540-10, 'ground').setOrigin(0).refreshBody();
 		 
 		 // continually make objects fall using timer
 		this.time.addEvent({
@@ -184,7 +198,8 @@ class GameScene extends Phaser.Scene {
 	update(time, delta) 
 	{
 
-		// move left
+	
+			// move left
 		if (this.cursors.left.isDown)
     	{
 			this.player.setVelocityX(-180);
@@ -196,18 +211,109 @@ class GameScene extends Phaser.Scene {
 			this.player.setVelocityX(180);
         	this.player.anims.play('right', true);
     	}
-		// Neutral (no movement)
-		else
-		{
-			this.player.setVelocityX(0);
-			this.player.anims.play('turn');
-		}
-		// jump
-		if (this.cursors.up.isDown && this.player.body.touching.down)
-		{
-			this.player.setVelocityY(-220);
+		
+		 //if either touch pointer is down. Two thumbs, two pointers
+        if (this.input.pointer1.isDown || this.input.pointer2.isDown) {
+            //work out half way point of our game 
+            var leftHalf = this.width / 2;
+            //if thumb is on the left hand side of the screen we are dealing with horizontal movement
+            if (this.input.pointer1.x < leftHalf || this.input.pointer2.x < leftHalf) {
+                //reset pointer variable
+                var myMovePointer = null;
+                //here we get the pointer that is being used on the left hand side of screen. Depends which thumb they touched screen with first.
+                if (this.input.pointer1.x < leftHalf && this.input.pointer1.isDown) {
+                    myMovePointer = this.input.pointer1;
+                }
+                if (this.input.pointer2.x < leftHalf && this.input.pointer2.isDown) {
+                    myMovePointer = this.input.pointer2;
+                }
+
+                //if we have an active touch pointer on the left hand side of the screen then...
+                if (myMovePointer) {
+                    //if thumb is in the left hand quarter of the screen then go left
+                    if (Math.floor(myMovePointer.x / (leftHalf / 2)) === 0) {
+                        this.player.setVelocityX(-180);
+						this.player.anims.play('left', true);
+                    }
+                    //If touch is to the right of the player move them right
+                    if (Math.floor(myMovePointer.x / (leftHalf / 2)) === 1) {
+                        this.player.setVelocityX(180);
+						this.player.anims.play('right', true);;
+                    }
+                }
+            }
+			
+			
+			 //if thumb is on the right hand side of the screen we are dealing with vertical movement - i.e. jumping.
+            if (this.input.pointer1.x > leftHalf || this.input.pointer2.x > leftHalf) {
+                //reset pointer variable
+                var myJumpPointer = null;
+                //get active touch pointer for this side of the screen
+                if (this.input.pointer1.x > leftHalf && this.input.pointer1.isDown) {
+                    myJumpPointer = this.input.pointer1;
+                }
+                if (this.input.pointer2.x > leftHalf && this.input.pointer2.isDown) {
+                    myJumpPointer = this.input.pointer2;
+                }
+                //if we have a touch pointer on right hand side of screen...
+                if (myJumpPointer) {
+                    //store last y position of touch pointer
+                    this.prevPos = this.yPos;
+                    //get new position of touch pointer
+                    this.yPos = myJumpPointer.y;
+
+                    //if we have moved our thump upwards and it's more than our threshold then we set jump flag to true
+                    if (this.prevPos - this.yPos > this.touchJumpThreshold) {
+                        this.touchJump = true;
+                    }
+                }
+            }
 		}
 		
+		
+		 //if not moving left or right via keys or touch device... Neutral (no movement)
+        if (!this.cursors.right.isDown && !this.cursors.left.isDown && !this.input.pointer1.isDown && !this.input.pointer2.isDown)
+			{
+           this.player.setVelocityX(0);
+			this.player.anims.play('turn');
+        }
+		
+		
+		
+		
+		
+		//get current time in seconds
+        var d = new Date();
+        var time = d.getTime();
+		
+		 //if we have just left the ground set edge time for 100ms time
+        if (!this.player.body.touching.down && this.wasStanding) {
+            this.edgeTimer = time + 100;
+        }
+		
+		
+		
+		// jump
+		if ((this.cursors.up.isDown ||  this.touchJump ) && (this.player.body.touching.down |  time <= this.edgeTimer) && !this.jumping)
+		{
+			this.player.setVelocityY(-220);
+			this.jumping = true;
+		}
+		
+		
+		
+         //if player is touching ground / platform then reset jump parametrs
+         if (this.player.body.touching.down) {
+                this.jumping = false;
+                this.touchJump = false;
+                this.prevPos = 0;
+            }
+		
+		 
+		 this.wasStanding = this.player.body.touching.down;
+		 
+		 
+		 // the cloud
 		 if (this.movingPlatform.x >= 450)
 		{
 			this.movingPlatform.setVelocityX(-25);
@@ -216,6 +322,7 @@ class GameScene extends Phaser.Scene {
 		{
 			this.movingPlatform.setVelocityX(25);
 		}
+		
 		
 		
 		// only skull 2 has Velocity and rotates
