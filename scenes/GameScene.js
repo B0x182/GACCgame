@@ -26,6 +26,8 @@ class GameScene extends Phaser.Scene {
 	skull1;
 	skull2;
 	skullCycle;
+	
+	isInvulnerable;
 
 	//added some new variables here to deal with touch jumping
         prevPos = 0;
@@ -62,6 +64,8 @@ class GameScene extends Phaser.Scene {
 	   
 	   this.m1Cnt = 0;
 	   this.m2Cnt = 0;
+	   
+	   this.isInvulnerable = false;
 	     
 	   
 	    // background image
@@ -438,7 +442,12 @@ class GameScene extends Phaser.Scene {
 
 	collectItem (player, item)
 	{
-		player.clearTint();
+		
+		if (!this.isInvulnerable)
+		{
+		 player.clearTint();
+		}
+		
     	item.disableBody(true, true);
 		
 		if(item.texture.key == "banana_1"){
@@ -461,32 +470,52 @@ class GameScene extends Phaser.Scene {
     	if(item.texture.key == "serum_2"){
     		 this.score += 10;
 			 this.m2Cnt += 1;
+			this.isInvulnerable = true;
 			
+			
+			player.setTint(0x8fb406);
+			
+			this.time.addEvent({
+			delay: 5000,
+			callback: this.resetIsInvulnerable, 
+			callbackScope: this,
+			loop: false,
+		});
     		 
     	}
      	this.setScoreText();
 		
 	}
 	
+	resetIsInvulnerable(){
+		this.isInvulnerable = false;
+		this.player.clearTint();
+	}
 	
 	hitIncollectible(player, inedible) 
 	{
+		if (!this.isInvulnerable)
+		{
 		//this.hitSound.play();
-		player.setTint(0xce6161);
-		inedible.disableBody(true, true);
+		 player.setTint(0xce6161);
+		 inedible.disableBody(true, true);
 		
-		this.lives -= 1;
-  		this.setLivesText();
+		 this.lives -= 1;
+  		 this.setLivesText();
+		}
 	}
 	
 	hitSkull(player, skull)
   	{
-  		player.setTint(0xce6161);
-  		skull.disableBody(true, true);
 		
-		this.lives -= 1;
-  		this.setLivesText();
-  		
+		if (!this.isInvulnerable)
+		{
+			player.setTint(0xce6161);
+			skull.disableBody(true, true);
+		
+			this.lives -= 1;
+			this.setLivesText();
+  		}
   	}
 
   	removeItem (object, item)
