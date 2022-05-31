@@ -13,6 +13,8 @@
 
 ## About 
 
+<img src="assets/images/game_screen_1.jpg" alt="game" align="center">
+
 This is a simple browser game written in JavaScript, using Phaser where you need catching items.
 The game can be played on desktop and mobile devices. 
 <br>
@@ -78,4 +80,4 @@ To avoid this the base-resolution has to be low for mobile devices, but then it 
 ## Contact
 
 Twitter - [B0x182](https://twitter.com/B0x182) 
-This is a community project. I am not associated with #GACC Stuff
+This is a community project. I am not associated with #GACC Staff
