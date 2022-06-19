@@ -146,10 +146,11 @@ class GameScene extends Phaser.Scene {
    		 this.physics.add.overlap(this.player, this.skulls, this.hitSkull, null, this);
 		 
 		 
-   		 this.physics.add.collider(this.skulls, this.skulls);
+   		 //this.physics.add.collider(this.skulls, this.skulls); // not for bottom runner
 		 this.physics.add.collider(this.skulls, this.movingPlatform);
 		 this.physics.add.collider(this.skulls, this.platforms);
 		 this.physics.add.overlap(this.skulls, this.collectibles, this.removeItem, null, this);
+		 this.physics.add.overlap(this.skulls,  this.collectiblesOnGround, this.removeItem, null, this);
 		
 		this.physics.add.overlap(this.collectibles, this.movingPlatform, this.removeItem, null, this);
 		 
@@ -389,11 +390,16 @@ class GameScene extends Phaser.Scene {
 		if(this.skullCycle === 1){
 			
 			
-			let xAxis = Math.floor(Math.random() * this.game.screenBaseSize.width) + 20;
-			 this.skull1.enableBody(true, xAxis, 25, true, true);
+			//let xAxis = Math.floor(Math.random() * this.game.screenBaseSize.width) + 20;
+			 //this.skull1.enableBody(true, xAxis, 25, true, true);
+			 
+			 // bottom runner
+			this.skull1.enableBody(true, this.game.screenBaseSize.width, this.game.screenBaseSize.height - 50, true, true);
+			this.skull1.setVelocity(100, 15);
 		}
 		if(this.skullCycle === 2){
 			
+			this.skull1.disableBody(true, true);
 			
 			let xAxis = Math.floor(Math.random() * this.game.screenBaseSize.width) + 20;
 			this.skull2.enableBody(true, xAxis, 0, true, true);
@@ -401,10 +407,12 @@ class GameScene extends Phaser.Scene {
 		}
 		if(this.skullCycle === 3){
 			
-			this.skull1.disableBody(true, true);
+			
 			this.skull2.disableBody(true, true);
 			this.skullCycle = 0;
+			 
 		}
+	
 		
 		
 	}
