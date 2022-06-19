@@ -37,7 +37,7 @@ Collectibles:
 * Banana 2:&emsp;  	      +2 score
 * Banana 3:&emsp; 	      + 3 score
 * Serum 1:&nbsp;&emsp;		+ 5 score
-* Serum 2:&nbsp;&emsp; 		+10 score
+* Serum 2:&nbsp;&emsp; 		+10 score + player is invulnerable for a few seconds
 
 Incollectible:
 * Stone:&emsp;&nbsp;&nbsp;&emsp;&emsp;	-1 live
@@ -62,7 +62,8 @@ const MIN_SIZE_HEIGHT_SCREEN = 240<br>
 
 ## Desktop
 
-On desktop environments the game can be played with the cursor keys; up, left and right
+On desktop environments the game can be played with the cursor keys; up, left and right.
+Jump is also possible with SPACE key.
 
 <img src="assets/images/action_keys.jpg" alt="skull" width="200" height="200">
 
