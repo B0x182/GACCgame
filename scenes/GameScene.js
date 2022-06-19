@@ -17,6 +17,7 @@ class GameScene extends Phaser.Scene {
 	
 	player;
 	cursors;
+	keySpace;
 	platforms; 
 	movingPlatform; 
 	
@@ -132,6 +133,8 @@ class GameScene extends Phaser.Scene {
 		
 		  //  Input Events
         this.cursors = this.input.keyboard.createCursorKeys();
+		this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
 		// add input for mobile
 		this.input.addPointer(1);
 
@@ -301,7 +304,7 @@ class GameScene extends Phaser.Scene {
 		
 		
 		// jump
-		if ((this.cursors.up.isDown ||  this.touchJump ) && (this.player.body.touching.down |  time <= this.edgeTimer) && !this.jumping)
+		if ((this.cursors.up.isDown || this.keySpace.isDown ||  this.touchJump ) && (this.player.body.touching.down |  time <= this.edgeTimer) && !this.jumping)
 		{
 			this.player.setVelocityY(-220);
 			this.jumping = true;
